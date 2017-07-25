@@ -28,7 +28,7 @@ class Citation {
         $output .= sprintf('%s. ', trim($data['title'], '. '));
 
         if (!empty($data['publication_title'])) {
-            $output .= sprintf('%s, [s.l.], ', $data['publication_title']);
+            $output .= sprintf('<strong>%s</strong>, [s.l.], ', $data['publication_title']);
         }
 
         if (!empty($data['publication_volume'])) {
