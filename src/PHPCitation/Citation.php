@@ -90,10 +90,56 @@ class Citation {
 
         $output .= PHP_EOL;
         $output .= PHP_EOL;
-        $output .= sprintf('%s: %s ', I18n::get('Retrieved from'), $data['url']);
+        $output .= sprintf('%s %s ', I18n::get('Retrieved from'), $data['url']);
 
         return $output;
 
+        
+    }
+
+    public static function join($array, $separator = ', ', $lastSeparator = ' and ') {
+        $last  = array_slice($array, -1);
+        $first = join($separator, array_slice($array, 0, -1));
+        $both  = array_filter(array_merge(array($first), $last), 'strlen');
+        return join($lastSeparator, $both);
+    }
+
+    public function bibtex() {
+        $data = $this->data;
+        $time = strtotime($data['date']);
+
+        $authors = array_map(function($author) {
+            return sprintf('%s %s', $author['first_name'], mb_strtoupper($author['last_name']));
+        }, $data['authors']);
+
+        $authors = self::join($authors);
+
+        return sprintf('
+                @%s{%s,
+                    author = {%s},
+                    title = {%s},
+                    journal = {%s},
+                    volume = {%s},
+                    number = {%s},
+                    year = {%s},
+                    keywords = {},
+                    abstract = {%s},
+                    issn = {%s},
+                    url = {%s}
+                }
+            ',
+            $data['type'],
+            $data['label'],
+            $authors,
+            trim($data['title'], '. '),
+            $data['publication_title'],
+            !empty($data['publication_volume']) ? $data['publication_volume'] : '0',
+            $data['publication_issue'],
+            date('Y', $time),
+            $data['abstract'],
+            $data['publication_issn'],
+            $data['url']
+        );
         
     }
 
