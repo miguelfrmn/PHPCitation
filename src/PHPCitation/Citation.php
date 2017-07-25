@@ -28,7 +28,7 @@ class Citation {
         $output .= sprintf('%s. ', trim($data['title'], '. '));
 
         if (!empty($data['publication_title'])) {
-            $output .= sprintf('%s, ', $data['publication_title']);
+            $output .= sprintf('%s, [s.l.], ', $data['publication_title']);
         }
 
         if (!empty($data['publication_volume'])) {
@@ -53,8 +53,6 @@ class Citation {
         $output .= sprintf('%s: %s', I18n::get('Available at'), $data['url']);
         $output .= PHP_EOL;
         $output .= sprintf('%s: %s', I18n::get('Date accessed'), date('d M. Y', strtotime($data['access_date'])));
-
-
 
         return $output;
     }

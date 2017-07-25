@@ -20,7 +20,7 @@ $data = [
         ]
     ],
     'title'             => 'Usos ciudadanos de Twitter en eventos políticos relevantes.La #SesiónDeInvestidura de Pedro Sánchez.',
-    'publication_title' => 'Comunicación y Hombre, [S.l.]',
+    'publication_title' => 'Comunicación y Hombre',
     'publication_volume' => null,
     'publication_issue' => 13,
     'publication_issn'  => '1885-365X',
