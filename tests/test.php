@@ -5,6 +5,9 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use PHPCitation\Citation;
 
 $data = [
+    'refworks_type' => 'article', 
+    'refworks_label' => 'CyH',  
+    'refworks_id' => '214',  
     'cbe_type' => 'Online', // Used for BibTex,
     'type' => 'article', // Used for BibTex,
     'label' => 'CyH214',  // Used for BibTex,
@@ -36,6 +39,9 @@ $data = [
 $cite = new Citation($data);
 
 ?>
+
+<h1>RefWorks</h1>
+<pre><?= $cite->refworks() ?></pre>
 
 <h1>MLA</h1>
 <pre><?= $cite->mla() ?></pre>

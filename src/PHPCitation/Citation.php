@@ -200,5 +200,39 @@ class Citation {
         return $output;
     }
 
+    public function refworks() {
+        $output = '';
+        $data = $this->data;
+        $time = strtotime($data['date']);
+
+        $authors = array_map(function($author) {
+            return sprintf('%s %s', $author['last_name'], mb_strtoupper($author['first_name'][0]));
+        }, $data['authors']);
+        $authors = self::join($authors, ', ', ', ');
+
+         return sprintf('
+                @%s{{%s}{%s},
+                    author = {%s},
+                    title = {%s},
+                    journal = {%s},
+                    volume = {%s},
+                    number = {%s},
+                    year = {%s},
+                    url = {%s}
+                }
+            ',
+            $data['refworks_type'],
+            $data['refworks_label'],
+            $data['refworks_id'],
+            $authors,
+            $this->getTitle(),
+            $data['publication_title'],
+            $this->getVolume(),
+            $data['publication_issue'],
+            date('Y', $time),
+            $data['url']
+        );
+    }
+
 }
 
