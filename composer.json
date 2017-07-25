@@ -1,0 +1,13 @@
+{
+    "name": "miguelxt/php-citation",
+    "description": "A barebone class to create biblography citations",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Miguel Fermin",
+            "email": "miguelx@gmail.com"
+        }
+    ],
+    "require": {}
+}
