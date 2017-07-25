@@ -3,11 +3,19 @@
     "description": "A barebone class to create biblography citations",
     "type": "library",
     "license": "MIT",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Miguel Fermin",
             "email": "miguelx@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "PHPCitation": "src/"
+        }
+    }
 }
