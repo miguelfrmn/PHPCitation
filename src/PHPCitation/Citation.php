@@ -9,6 +9,14 @@ class Citation {
         $this->data = $data;
     }
 
+    public function getVolume() {
+        return !empty($data['publication_volume']) ? $data['publication_volume'] : '0';
+    }
+
+    public function getTitle() {
+        return trim($this->data['title'], '. ');
+    }
+
     public function abnt() {
 
         $output = '';
@@ -143,6 +151,29 @@ class Citation {
         
     }
 
+    public function cbe() {
+        $output = '';
+        $data = $this->data;
+        $time = strtotime($data['date']);
+
+        $authors = array_map(function($author) {
+            return sprintf('%s %s', $author['last_name'], mb_strtoupper($author['first_name'][0]));
+        }, $data['authors']);
+
+        $authors = self::join($authors, ', ', ', ');
+
+        $output .= sprintf('%s. ', $authors);
+
+        $output .= sprintf('%s. ', $this->getTitle());
+        $output .= sprintf('%s [%s] ', $data['publication_title'], $data['cbe_type']);
+        
+        $output .= strftime('(%G %b %e); ', $time);
+
+        $output .= sprintf('%s(%s).', $this->getVolume(), $data['publication_issue']);
+    
+        return $output;
+
+    }
 
 }
 

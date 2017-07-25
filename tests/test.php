@@ -5,6 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use PHPCitation\Citation;
 
 $data = [
+    'cbe_type' => 'Online', // Used for BibTex,
     'type' => 'article', // Used for BibTex,
     'label' => 'CyH214',  // Used for BibTex,
     'authors' => [
@@ -35,6 +36,9 @@ $data = [
 $cite = new Citation($data);
 
 ?>
+
+<h1>CBE</h1>
+<pre><?= $cite->cbe() ?></pre>
 
 <h1>BibTex</h1>
 <pre><?= $cite->bibtex() ?></pre>
