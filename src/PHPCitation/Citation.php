@@ -234,5 +234,29 @@ class Citation {
         );
     }
 
+    public function turabian() {
+        $output = '';
+        $data = $this->data;
+        $time = strtotime($data['date']);
+
+        $authors = array_map(function($author) {
+            return sprintf('%s, %s', mb_strtoupper($author['last_name']), ($author['first_name']));
+        }, $data['authors']);
+
+        $authors = self::join($authors);
+
+        $output .= sprintf(
+            '%s "%s" <em>%s</em> no. %s (%s)',
+            $authors,
+            $this->getTitle(),
+            $data['publication_title'],
+            $data['publication_issue'],
+            strftime('%e %B %G', $time)
+        );
+    
+        return $output;
+
+    }
+
 }
 

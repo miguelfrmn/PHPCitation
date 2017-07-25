@@ -40,6 +40,10 @@ $cite = new Citation($data);
 
 ?>
 
+<h1>Turabian</h1>
+<pre><?= $cite->turabian() ?></pre>
+
+
 <h1>RefWorks</h1>
 <pre><?= $cite->refworks() ?></pre>
 
