@@ -175,5 +175,30 @@ class Citation {
 
     }
 
+    public function mla() {
+        $output = '';
+        $data = $this->data;
+        $time = strtotime($data['date']);
+
+        $authors = $data['authors'];
+
+        // @link: http://sites.umuc.edu/library/libhow/mla_examples.cfm#authors
+        if (count($authors) === 1) {
+            $output .= sprintf('%s, %s. ', $authors[0]['last_name'], $authors[0]['first_name']);
+        } else if (count($authors) === 2) {
+            $output .= sprintf('%s, %s, and', $authors[0]['last_name'], $authors[0]['first_name']);
+            $output .= sprintf('%s %s. ', $authors[1]['first_name'], $authors[1]['last_name']);
+        } else if (count($authors) >= 3) {
+            $output .= sprintf('%s, %s, et al. ', $authors[0]['last_name'], $authors[0]['first_name']);
+        }
+
+        $output .= sprintf('"%s" ', $this->getTitle());
+        $output .= sprintf('<em>%s</em>, ', $data['publication_title']);
+        $output .= sprintf('vol. %s, no. %s, ', $this->getVolume(), $data['publication_issue']);
+        $output .= date('Y. ', $time);
+        
+        return $output;
+    }
+
 }
 

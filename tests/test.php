@@ -37,6 +37,9 @@ $cite = new Citation($data);
 
 ?>
 
+<h1>MLA</h1>
+<pre><?= $cite->mla() ?></pre>
+
 <h1>CBE</h1>
 <pre><?= $cite->cbe() ?></pre>
 
