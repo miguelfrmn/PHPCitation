@@ -57,6 +57,46 @@ class Citation {
         return $output;
     }
 
+    public function apa() {
+        $output = '';
+        $data = $this->data;
+
+        if (!empty($data['authors'])) {
+            $authors = [];
+
+            foreach ($data['authors'] as $author) {
+                $authors[] = sprintf('%s, %s', mb_strtoupper($author['last_name']), mb_strtoupper($author['first_name'][0]));
+            }
+
+            if (count($authors) === 1) {
+                $output .= $authors . '. ';
+            } else {
+                $last = array_pop($authors);
+                $output .= join(', ', $authors) . ' & ' . $last . '. ';
+            }
+        }
+
+        if (!empty($data['date'])) {
+            $time = strtotime($data['date']);
+            $output .= strftime('(%G, %B)', $time) . '. ';
+        }
+
+        $output .= sprintf('%s. ', trim($data['title'], '. '));
+        $output .= sprintf('<em>%s</em>, ', $data['publication_title']);
+
+        $volume = !empty($data['publication_volume']) ? $data['publication_volume'] : '0';
+
+        $output .= sprintf('%s(%s), ', $volume, $data['publication_issue']);
+
+        $output .= PHP_EOL;
+        $output .= PHP_EOL;
+        $output .= sprintf('%s: %s ', I18n::get('Retrieved from'), $data['url']);
+
+        return $output;
+
+        
+    }
+
 
 }
 

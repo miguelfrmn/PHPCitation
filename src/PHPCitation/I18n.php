@@ -6,6 +6,7 @@ class I18n {
     private static $strings = [
         'Available at' => 'Available at',
         'Date accessed' => 'Date accessed',
+        'Retrieved from' => 'Retrieved from',
     ];
 
     public static function set($key, $value = null) {

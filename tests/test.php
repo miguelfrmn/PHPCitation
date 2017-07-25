@@ -31,6 +31,11 @@ $data = [
 
 $cite = new Citation($data);
 
-echo '<pre>';
-echo $cite->abnt();
-echo '</pre>';
+?>
+
+<h1>APA</h1>
+<pre><?= $cite->apa() ?></pre>
+
+<h1>ABNT</h1>
+<pre><?= $cite->abnt() ?></pre>
+
